@@ -1,3 +1,7 @@
+var crankMultiplier = 1;
+var doublePrice = 5;
+var count = 0;
+
 (function() {
 	var mX, mY, angle, dx, dy,
           //$distance = $('#distance span'),
@@ -12,15 +16,12 @@
   }
 
 
-  var count = 0;
   var flag = 0;
+  
 
   document.getElementById("count").innerText = count;
 
-  function increment(){
-      count = count + 1;
-      document.getElementById("count").innerText = count;
-  }
+  
 
   dragElement(document.getElementById("crank"));
 
@@ -77,7 +78,7 @@
       }
       if(angle > -1.57 && angle < 0){
       	if(flag == 3){
-        	count = count + 1;
+        	count = count + crankMultiplier;
         	document.getElementById("count").innerText = count;
       	}
         flag = 0;
@@ -93,3 +94,14 @@
     }
   }
 })();
+
+function crankDouble(){
+		if(count >= doublePrice){
+    		count = count - doublePrice;
+        document.getElementById("count").innerText = count;
+        $crankboost = $('#crankboost span');
+        crankMultiplier = crankMultiplier*2;
+        doublePrice = doublePrice * 5;
+        $crankboost.text(doublePrice);
+    }
+}
