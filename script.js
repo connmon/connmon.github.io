@@ -1,11 +1,14 @@
 var crankMultiplier = 1;
 var doublePrice = 5;
+var idlePrice = 5;
+var idleRate = 0;
 var count = 0;
 
 (function() {
 	var mX, mY, angle, dx, dy,
           //$distance = $('#distance span'),
           $middle  = $('#middle');
+          
 
   function calculateDistance(elem, mouseX, mouseY) {
           dx = (mouseX - (elem.offset().left+(elem.width()/2)))
@@ -95,13 +98,36 @@ var count = 0;
   }
 })();
 
+function idleAdd(){
+		if(count >= idlePrice){
+    		count = count - idlePrice;
+        document.getElementById("count").innerText = count;
+        //$idleboost = $('idleboost span');
+        idleRate = idleRate + 1;
+        idlePrice = idlePrice * 2;
+        document.getElementById("idleCost").innerText = idlePrice;
+    }
+}
+
 function crankDouble(){
 		if(count >= doublePrice){
     		count = count - doublePrice;
         document.getElementById("count").innerText = count;
-        $crankboost = $('#crankboost span');
+        //$crankboost = $('#crankboost span');
         crankMultiplier = crankMultiplier*2;
         doublePrice = doublePrice * 5;
-        $crankboost.text(doublePrice);
+        document.getElementById("doubleCost").innerText = doublePrice;
     }
 }
+
+function refreshData()
+{
+    count = count + idleRate;
+    
+    document.getElementById("count").innerText = count;
+
+    setTimeout(refreshData, 1000);
+}
+
+
+refreshData(); // execute function
