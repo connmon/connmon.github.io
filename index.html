@@ -1,10 +1,9 @@
 <!doctype html>
 <html>
 <head>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <title>Clicker</title>
-        <meta charset="UTF-8">
-        <link rel="stylesheet" href="style.css">
+<title>Clicker</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div id="counter">
@@ -12,9 +11,15 @@
       </h1>
     </div>
     <div id="crankboost">
-      price: <span>5</span>
+      price: <div id = doubleCost>5</div>
       <button onclick="crankDouble()">
       double
+      </button>
+    </div>
+    <div id="idleboost">
+      price: <div id = idleCost>5</div>
+      <button onclick="idleAdd()">
+      idle add
       </button>
     </div>
     <div id="crank">
