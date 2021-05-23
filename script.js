@@ -26,30 +26,32 @@ var count = 0;
 
   
 
-  dragElement(document.getElementById("crank"));
+  dragCrank(document.getElementById("crank"));
+  dragLever(document.getElementById("lever"));
 
-  function dragElement(elmnt) {
+  function dragCrank(elmnt) {
     var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+    
     if (document.getElementById(elmnt.id + "header")) {
       // if present, the header is where you move the DIV from:
-      document.getElementById(elmnt.id + "header").onmousedown = dragMouseDown;
+      document.getElementById(elmnt.id + "header").onmousedown = crankMouseDown;
     } else {
       // otherwise, move the DIV from anywhere inside the DIV:
-      elmnt.onmousedown = dragMouseDown;
+      elmnt.onmousedown = crankMouseDown;
     }
 
-  function dragMouseDown(e) {
+  function crankMouseDown(e) {
       e = e || window.event;
       e.preventDefault();
       // get the mouse cursor position at startup:
       pos3 = e.clientX;
       pos4 = e.clientY;
-      document.onmouseup = closeDragElement;
+      document.onmouseup = closeCrankElement;
       // call a function whenever the cursor moves:
-      document.onmousemove = elementDrag;
+      document.onmousemove = crankDrag;
     }
 
-  function elementDrag(e) {
+  function crankDrag(e) {
       e = e || window.event;
       e.preventDefault();
       // calculate the new cursor position:
@@ -63,39 +65,123 @@ var count = 0;
       elmnt.style.left = (window.scrollX + document.querySelector('#middle').getBoundingClientRect().left + (Math.cos(angle) * 60)) + "px";
       //document.getElementById("count").innerText = flag;
       if(angle > 0 && angle < 1.57){
-      	flag = 1;
+        flag = 1;
       }
       if(angle > 1.57 && angle < 3){
-      	if(flag >= 1){
-        	flag = 2;
+        if(flag >= 1){
+          flag = 2;
         }else{
-        	flag = 0;
+          flag = 0;
         }
       }
       if(angle > -3 && angle < -1.57){
-      	if(flag >= 2){
-        	flag = 3;
+        if(flag >= 2){
+          flag = 3;
         }else{
-        	flag = 0;
+          flag = 0;
         }
       }
       if(angle > -1.57 && angle < 0){
-      	if(flag == 3){
-        	count = count + crankMultiplier;
-        	document.getElementById("count").innerText = count;
-      	}
+        if(flag == 3){
+          count = count + crankMultiplier;
+          document.getElementById("count").innerText = count;
+        }
         flag = 0;
       }
       
-      
   }
 
-  function closeDragElement() {
+  function closeCrankElement() {
       // stop moving when mouse button is released:
       document.onmouseup = null;
       document.onmousemove = null;
     }
   }
+  
+  function dragLever(elmnt) {
+    var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+    
+    if (document.getElementById(elmnt.id + "header")) {
+      // if present, the header is where you move the DIV from:
+      document.getElementById(elmnt.id + "header").onmousedown = leverMouseDown;
+    } else {
+      // otherwise, move the DIV from anywhere inside the DIV:
+      elmnt.onmousedown = leverMouseDown;
+    }
+
+  function leverMouseDown(e) {
+      e = e || window.event;
+      e.preventDefault();
+      // get the mouse cursor position at startup:
+      pos3 = e.clientX;
+      pos4 = e.clientY;
+      document.onmouseup = closeLeverElement;
+      // call a function whenever the cursor moves:
+      document.onmousemove = leverDrag;
+    }
+
+  function leverDrag(e) {
+      e = e || window.event;
+      e.preventDefault();
+      // calculate the new cursor position:
+      pos1 = pos3 - e.clientX;
+      pos2 = pos4 - e.clientY;
+      pos3 = e.clientX;
+      pos4 = e.clientY;
+      if(pos4 > 500){
+      	pos4 = 500;
+      }
+      if(pos4 < 100){
+      	pos4 = 100;
+      }
+      // set the element's new position:
+      elmnt.style.top = ((pos4/2) + "px");
+      if(pos2 < 0){
+        angle = pos4 - 100;
+        angle = (angle/400)*15;
+        crankY = (window.scrollY + document.querySelector('#middle').getBoundingClientRect().top  + (Math.sin(angle) * 60));
+        crankX = (window.scrollX + document.querySelector('#middle').getBoundingClientRect().left + (Math.cos(angle) * 60));
+        document.getElementById("crank").style.top = crankY + "px";
+        document.getElementById("crank").style.left = crankX + "px";
+        
+        crankPos = calculateDistance($middle, crankX, crankY);
+        //document.getElementById("count").innerText = crankPos;
+        
+        if(crankPos > 0 && crankPos < 1.57){
+        flag = 1;
+        }
+        if(crankPos > 1.57 && crankPos < 3){
+          if(flag >= 1){
+            flag = 2;
+          }else{
+            flag = 0;
+          }
+        }
+        if(crankPos > -3 && crankPos < -1.57){
+          if(flag >= 2){
+            flag = 3;
+          }else{
+            flag = 0;
+          }
+        }
+        if(crankPos > -1.57 && crankPos < 0){
+          if(flag == 3){
+            count = count + crankMultiplier;
+            document.getElementById("count").innerText = count;
+          }
+          flag = 0;
+        }
+      }
+      
+  }
+
+  function closeLeverElement() {
+      // stop moving when mouse button is released:
+      document.onmouseup = null;
+      document.onmousemove = null;
+    }
+  }
+  
 })();
 
 function idleAdd(){
