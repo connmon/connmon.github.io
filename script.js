@@ -3,6 +3,7 @@ var doublePrice = 5;
 var idlePrice = 5;
 var idleRate = 0;
 var count = 0;
+var leverFlag = 0;
 
 (function() {
 	var mX, mY, angle, dx, dy,
@@ -135,36 +136,44 @@ var count = 0;
       	pos4 = 100;
       }
       // set the element's new position:
-      elmnt.style.top = ((pos4/2) + "px");
+      elmnt.style.top = ((pos4) + "px");
       if(pos2 < 0){
         angle = pos4 - 100;
-        angle = (angle/400)*15;
+        angle = (angle/400)*25;
         crankY = (window.scrollY + document.querySelector('#middle').getBoundingClientRect().top  + (Math.sin(angle) * 60));
         crankX = (window.scrollX + document.querySelector('#middle').getBoundingClientRect().left + (Math.cos(angle) * 60));
         document.getElementById("crank").style.top = crankY + "px";
         document.getElementById("crank").style.left = crankX + "px";
         
-        crankPos = calculateDistance($middle, crankX, crankY);
+        //crankPos = calculateDistance($middle, crankX, crankY);
         //document.getElementById("count").innerText = crankPos;
         
-        if(crankPos > 0 && crankPos < 1.57){
-        flag = 1;
+        if(pos4 > 100 && pos4 < 200){
+        flag = 3;
         }
-        if(crankPos > 1.57 && crankPos < 3){
+        if(pos4 > 200 && pos4 < 300){
           if(flag >= 1){
-            flag = 2;
+          	if(flag == 3){
+                count = count + crankMultiplier;
+                document.getElementById("count").innerText = count;
+            }
+            flag = 4;
           }else{
             flag = 0;
           }
         }
-        if(crankPos > -3 && crankPos < -1.57){
+        if(pos4 > 300 && pos4 < 400){
           if(flag >= 2){
+          	if(flag == 4){
+                count = count + crankMultiplier;
+                document.getElementById("count").innerText = count;
+            }
             flag = 3;
           }else{
             flag = 0;
           }
         }
-        if(crankPos > -1.57 && crankPos < 0){
+        if(pos4 > 400 && pos4 < 500){
           if(flag == 3){
             count = count + crankMultiplier;
             document.getElementById("count").innerText = count;
@@ -215,5 +224,12 @@ function refreshData()
     setTimeout(refreshData, 1000);
 }
 
+function leverUnlock(){
+		if(count >= 2000 && leverFlag == 0){
+    		count = count - 2000;
+				document.getElementById("lever").style.visibility = "visible";
+        leverFlag = 1;
+    }
+}
 
 refreshData(); // execute function
