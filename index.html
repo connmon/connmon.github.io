@@ -1,45 +1,70 @@
 <!doctype html>
 <html>
-<head>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<title>Clicker</title>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-    <div id="counter">
-      <h1 id="count">
-      </h1>
-    </div>
-    <div id="crankboost">
-      price: <div id = doubleCost>5</div>
-      <button onclick="crankDouble()">
-      double
-      </button>
-    </div>
-    <div id="idleboost">
-      price: <div id = idleCost>5</div>
-      <button onclick="idleAdd()">
-      idle add
-      </button>
-    </div>
-    <div id="leverunlock">
-      price: <div id = leverCost>2000</div>
-      <button onclick="leverUnlock()">
-      unlock lever
-      </button>
-    </div>
-    <div id="crank">
-        <div id="crankheader">
-        CRANK
-        </div>
-    </div>
-    <div id="lever">
-        <div id="leverheader">
-        LEVER
-        </div>
-    </div>
-    <div id ="middle"></div>
-    <script src="script.js"></script>
-</body>
+
+  <head>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+      <link rel="preconnect" href="https://fonts.gstatic.com">
+      <link href="https://fonts.googleapis.com/css2?family=Mate+SC&family=Odibee+Sans&display=swap" rel="stylesheet">
+      <meta name="viewport" content="with=device-width, initial-scale=1.0" charset="UTF-8">
+      <link rel="stylesheet" href="style.css">
+  </head>
+
+  <body>
+      <section class="header">
+
+          <div id="counter">
+              <h1 id="count">
+              </h1>
+          </div>
+          
+          <div class="shop">
+              <div id="crankboost">
+                  <div id=doubleCost>5</div>
+                  <button class="button" onclick="crankDouble()">
+                      double points per crank
+                  </button>
+              </div>
+              
+              <div id="idleboost">
+                  <div id=idleCost>5</div>
+                  <button class="button" onclick="idleAdd()">
+                      boost points per second
+                  </button>
+              </div>
+              
+              <div id="leverunlock">
+                  <div id=leverCost>1000</div>
+                  <button class="button" onclick="leverUnlock()">
+                      unlock lever
+                  </button>
+              </div>
+          </div>
+          
+          <div class="spotify">
+              <p>
+                  Spotify
+              </p>
+              <button class="spotify-button">
+                  PLAY
+              </button>
+          </div>
+          
+          <div id="crank">
+              <div id="crankheader">
+                  CRANK
+              </div>
+          </div>
+          
+          <div id="lever">
+              <div id="leverheader">
+                  LEVER
+              </div>
+          </div>
+          <div id="middle"></div>
+
+      </section>
+      <script src="script.js"></script>
+  </body>
+
 </html>
+
