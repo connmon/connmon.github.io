@@ -198,7 +198,7 @@ function idleAdd(){
     		count = count - idlePrice;
         document.getElementById("count").innerText = count;
         //$idleboost = $('idleboost span');
-        idleRate = idleRate + 1;
+        idleRate = idleRate + 2;
         idlePrice = idlePrice * 2;
         document.getElementById("idleCost").innerText = idlePrice;
     }
@@ -221,13 +221,14 @@ function refreshData()
     
     document.getElementById("count").innerText = count;
 
-    setTimeout(refreshData, 1000);
+    setTimeout(refreshData, 750);
 }
 
 function leverUnlock(){
-		if(count >= 2000 && leverFlag == 0){
-    		count = count - 2000;
+		if(count >= 1000 && leverFlag == 0){
+    		count = count - 1000;
 				document.getElementById("lever").style.visibility = "visible";
+        document.getElementById("leverunlock").style.visibility = "hidden";
         leverFlag = 1;
     }
 }
