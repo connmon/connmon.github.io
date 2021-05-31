@@ -2,6 +2,39 @@
   padding: 0;
   margin: 0;
 }
+.header{
+    min-height: 100vh;
+    width: 100%;
+    background-image: linear-gradient(rgba(4, 9, 30, 0.7), rgba(40, 90, 100, 0.7));
+}
+.shop{
+  display: inline-block;
+  padding: 2% 6%;
+  justify-content: space-between;
+  align-items: center;
+  flex: 1;
+  text-align: left;
+  position: relative;
+  color: black;
+  font-size: 13px;
+  font-family: 'Mate SC', serif;
+}
+.button{
+  color: black;
+  background-color: lightblue;
+  font-weight: bold;
+}
+.spotify{
+  padding: 2% 6%;
+  justify-content: space-between;
+  align-items: center;
+  align-items: right;
+  text-align: right;
+  color: black;
+  font-size: 20px;
+  font-family: 'Mate SC', serif;
+  font-weight: bold;
+}
 #counter{
   justify-content: center;
   align-items: center;
