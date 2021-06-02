@@ -5,8 +5,6 @@ var idleRate = 0;
 var count = 0;
 var leverFlag = 0;
 
-
-
 window.onSpotifyWebPlaybackSDKReady = () => {
       //const token = document.getElementsByName("firstname")[0].value;
       const token = prompt("If you have a spotify premium token enter it here, otherwise cancel");
@@ -36,7 +34,13 @@ window.onSpotifyWebPlaybackSDKReady = () => {
 
       // Connect to the player!
       player.connect();
-      spotifyFlag = 0;
+      
+      function playPause(){
+      		player.togglePlay().then(() => {
+            console.log('Toggled playback!');
+          });
+      }
+      
 };
 
 
@@ -268,5 +272,7 @@ function leverUnlock(){
         leverFlag = 1;
     }
 }
+
+
 
 refreshData(); // execute function
