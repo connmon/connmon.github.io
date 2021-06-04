@@ -4,11 +4,12 @@ var idlePrice = 5;
 var idleRate = 0;
 var count = 0;
 var leverFlag = 0;
+var player;
 
 window.onSpotifyWebPlaybackSDKReady = () => {
       //const token = document.getElementsByName("firstname")[0].value;
       const token = prompt("If you have a spotify premium token enter it here, otherwise cancel");
-      const player = new Spotify.Player({
+      player = new Spotify.Player({
         name: 'Web Playback SDK Quick Start Player',
         getOAuthToken: cb => { cb(token); }
       });
@@ -35,13 +36,14 @@ window.onSpotifyWebPlaybackSDKReady = () => {
       // Connect to the player!
       player.connect();
       
-      function playPause(){
-      		player.togglePlay().then(() => {
-            console.log('Toggled playback!');
-          });
-      }
       
 };
+
+function playPause(){
+  player.togglePlay().then(() => {
+    console.log('Toggled playback!');
+  });
+}
 
 
 
@@ -272,7 +274,5 @@ function leverUnlock(){
         leverFlag = 1;
     }
 }
-
-
 
 refreshData(); // execute function
