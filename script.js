@@ -4,7 +4,7 @@ var idlePrice = 5;
 var idleRate = 0;
 var count = 0;
 var leverFlag = 0;
-var player;
+var player = null;
 
 window.onSpotifyWebPlaybackSDKReady = () => {
       //const token = document.getElementsByName("firstname")[0].value;
@@ -45,6 +45,11 @@ function playPause(){
   });
 }
 
+function skipSong(){
+	player.nextTrack().then(() => {
+    console.log('Skipped to next track!');
+  });
+}
 
 
 (function() {
@@ -264,6 +269,24 @@ function refreshData()
     document.getElementById("count").innerText = count;
 
     setTimeout(refreshData, 750);
+    
+    if(player != null){
+        player.getCurrentState().then(state => {
+        if (!state) {
+            //console.error('User is not playing music through the Web Playback SDK');
+            return;
+          }
+
+          let {
+            current_track,
+            next_tracks: [next_track]
+          } = state.track_window;
+
+          document.getElementById("currentSong").innerText = "PLAYING: " + String(current_track.name);
+          //console.log('Currently Playing', current_track);
+          //console.log('Playing Next', next_track);
+        });
+    }
 }
 
 function leverUnlock(){
